@@ -37,6 +37,7 @@ public class ClientsController {
     public Client insertClient(@RequestBody @Valid Client client){
         return clientRepository.save(client);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<Client>  updateClient(@PathVariable @Valid Long id,@Valid @RequestBody Client client){
         if(!clientRepository.existsById(id)){
@@ -46,6 +47,7 @@ public class ClientsController {
         client = clientRepository.save(client);
         return ResponseEntity.ok().body(client);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@Valid @PathVariable long id){
         if(!clientRepository.existsById(id)){
