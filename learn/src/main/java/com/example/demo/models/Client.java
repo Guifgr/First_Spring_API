@@ -1,17 +1,47 @@
 package com.example.demo.models;
 
-public class Client {
-    public int id;
-    public String name;
-    public String email;
-    public String phone;
-    public String password;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.IdentityHashMap;
+import java.util.Objects;
 
-    public int getId() {
+@Entity
+public class Client {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @NotBlank
+    @Size(max = 200)
+    private String name;
+
+    @NotBlank
+    @Email
+    @Size(max = 60)
+    private String email;
+
+    @NotBlank
+    @Size(max = 40)
+    private String phone;
+
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String picture;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -39,11 +69,16 @@ public class Client {
         this.phone = phone;
     }
 
-    public String getPassword() {
-        return password;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Client)) return false;
+        Client client = (Client) o;
+        return id == client.id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
