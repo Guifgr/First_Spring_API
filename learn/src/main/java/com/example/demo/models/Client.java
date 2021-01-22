@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.IdentityHashMap;
 import java.util.Objects;
 
 @Entity
@@ -28,29 +27,29 @@ public class Client {
 
 
     public String getPicture() {
-        return picture;
-    }
+            return picture;
+        }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
+        public void setPicture(String picture) {
+            this.picture = picture;
+        }
 
-    public String picture;
+        public String picture;
 
-    public long getId() {
-        return id;
-    }
+        public long getId() {
+            return id;
+        }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+        public void setId(long id) {
+            this.id = id;
+        }
 
-    public String getName() {
-        return name;
-    }
+        public String getName() {
+            return name;
+        }
 
-    public void setName(String name) {
-        this.name = name;
+        public void setName(String name) {
+            this.name = name;
     }
 
     public String getEmail() {

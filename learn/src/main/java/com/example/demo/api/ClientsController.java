@@ -32,6 +32,16 @@ public class ClientsController {
         }
         return ResponseEntity.notFound().build();
     }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Client> searchClientByEmail(@PathVariable @Valid String email){
+        Optional<Client> client = Optional.ofNullable(clientRepository.findByEmail(email));
+
+        if(client.isPresent()){
+            return ResponseEntity.ok(client.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Client insertClient(@RequestBody @Valid Client client){
