@@ -48,10 +48,7 @@ public class ClientsController {
     public ResponseEntity<String> insertClient(@RequestBody @Valid Client client){
         var validCpf = new ValidCpf();
         validCpf.setCpfNumber(client.getCpf());
-        System.out.println(client.getCpf());
         validCpf.validCpf(validCpf);
-
-        System.out.println(validCpf.isValid());
 
         if(validCpf.isValid()){
             clientRepository.save(client);
