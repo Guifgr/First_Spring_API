@@ -2,12 +2,14 @@ package com.example.demo.api;
 
 import com.example.demo.domain.repository.ClientRepository;
 import com.example.demo.models.Client;
+import com.example.demo.models.ValidCpf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,9 +45,19 @@ public class ClientsController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Client insertClient(@RequestBody @Valid Client client){
-        return clientRepository.save(client);
+    public ResponseEntity<String> insertClient(@RequestBody @Valid Client client){
+        var validCpf = new ValidCpf();
+        validCpf.setCpfNumber(client.getCpf());
+        System.out.println(client.getCpf());
+        validCpf.validCpf(validCpf);
+
+        System.out.println(validCpf.isValid());
+
+        if(validCpf.isValid()){
+            clientRepository.save(client);
+            return ResponseEntity.created(URI.create("")).build();
+        }
+            return ResponseEntity.badRequest().body("invalid CPF");
     }
 
     @PutMapping("/{id}")

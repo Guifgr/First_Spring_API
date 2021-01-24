@@ -25,6 +25,10 @@ public class Client {
     @Size(max = 40)
     private String phone;
 
+    @NotBlank
+    @Size(max = 12)
+    private String cpf;
+
 
     public String getPicture() {
             return picture;
@@ -66,6 +70,14 @@ public class Client {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     @Override
